@@ -24,30 +24,6 @@ class App extends Component {
     filterId: shortid.generate(),
   };
 
-  componentDidMount() {
-    try {
-      const persistedContacts = localStorage.getItem('contacts');
-      if (persistedContacts) {
-        const contacts = JSON.parse(persistedContacts);
-
-        this.setState({ contacts });
-      }
-    } catch (err) {
-      throw new Error(err);
-    }
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    try {
-      const { contacts } = this.state;
-      if (prevState.contacts !== contacts) {
-        localStorage.setItem('contacts', JSON.stringify(contacts));
-      }
-    } catch (err) {
-      throw new Error(err);
-    }
-  }
-
   handleChange = e => {
     const { name, value } = e.target;
     this.setState({ [name]: value });
