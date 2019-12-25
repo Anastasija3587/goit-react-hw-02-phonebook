@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import shortid from 'shortid';
+import { Notyf } from 'notyf';
 import CreateContact from './CreateContact/CreateContact';
 import Contacts from './Contacts/Contacts';
 import Filter from './Filter/Filter';
+import 'notyf/notyf.min.css';
+
+const notyf = new Notyf();
 
 const filterContactsByQuery = (contacts, filter) => {
   return contacts.filter(contact =>
@@ -38,8 +42,7 @@ class App extends Component {
       number,
     };
     if (contacts.find(contact => contact.name === name)) {
-      // eslint-disable-next-line no-alert
-      alert('This name already exists');
+      notyf.error('This name already exists');
     } else {
       this.setState(state => ({
         contacts: [...state.contacts, createContact],
